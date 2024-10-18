@@ -1,3 +1,5 @@
+import { Types } from 'mongoose';
+
 export type TGuardian = {
   fatherName: string;
   fatherOccupation: string;
@@ -7,7 +9,7 @@ export type TGuardian = {
   motherContactNo: string;
 };
 
-export type UserName = {
+export type TUserName = {
   firstName: string;
   middleName: string;
   lastName: string;
@@ -20,10 +22,11 @@ export type TLocalGuardian = {
   address: string;
 };
 
-export type Student = {
+export type TStudent = {
   id: string;
+  user: Types.ObjectId; //! 11-10 Create User as Student
   password: string;
-  name: UserName;
+  name: TUserName;
   gender: 'male' | 'female'; // union type literal
   dateOfBirth: string;
   email: string;
@@ -34,6 +37,9 @@ export type Student = {
   permanentAddress: string;
   guardian: TGuardian;
   localGuardian: TLocalGuardian;
-  profileImg?: string;
-  isActive: 'active' | 'inactive';
+  profileImage?: string;
+  // ! 11-10 Create User as Student
+  // ? now it is available in user model
+  // isActive: 'active' | 'inactive';
+  isDeleted: boolean;
 };

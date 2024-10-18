@@ -5,8 +5,11 @@ import mongoose from 'mongoose';
 async function main() {
   try {
     await mongoose.connect(config.database_url as string);
+    console.log('mongo db connected successfully samiha');
     app.listen(config.port, () => {
-      console.log(`Example app listening on port ${config.port}`);
+      console.log(
+        `Express application listening on port ${config.port} vutu vai`,
+      );
     });
   } catch (error) {
     console.log(error);

@@ -1,4 +1,13 @@
+// 18 Oct, 24
+// 11-8 Refactor user validation , student route ,controller and service
+
 import { StudentModel } from './student.model';
+
+// ! move to user service
+// const createStudentIntoDB = async (student: Student) => {
+//   const result = await StudentModel.create(student); // create() mongoose function
+//   return result; // this result will send to controller
+// };
 
 const getAllStudentsFromDB = async () => {
   const result = await StudentModel.find();
@@ -20,15 +29,3 @@ export const StudentServices = {
   getSingleStudentFromDB,
   deleteStudentFromDB,
 };
-
-// import { StudentModel } from './student.model';
-// import { Student } from './student.interface'; // type definition
-
-// const createStudentIntoDB = async (student: Student) => {
-//   const result = await StudentModel.create(student); // create() mongoose function
-//   return result; // this result will send to controller
-// };
-
-// export const StudentServices = {
-//   createStudentIntoDB,
-// };
