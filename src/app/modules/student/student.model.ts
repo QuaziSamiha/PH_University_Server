@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 import {
-  Gaurdian,
-  LocalGaurdian,
+  TGuardian,
+  TLocalGuardian,
   Student,
   UserName,
 } from './student.interface';
@@ -20,7 +20,7 @@ const userNameSchema = new Schema<UserName>({
   },
 });
 
-const gaurdianSchema = new Schema<Gaurdian>({
+const guardianSchema = new Schema<TGuardian>({
   fatherName: { type: String, required: true },
   fatherOccupation: { type: String, required: true },
   fatherContactNo: { type: String, required: true },
@@ -29,7 +29,7 @@ const gaurdianSchema = new Schema<Gaurdian>({
   motherContactNo: { type: String, required: true },
 });
 
-const localGaurdianSchema = new Schema<LocalGaurdian>({
+const localGuardianSchema = new Schema<TLocalGuardian>({
   name: { type: String, required: true },
   occupation: { type: String, required: true },
   contactNo: { type: String, required: true },
@@ -38,6 +38,7 @@ const localGaurdianSchema = new Schema<LocalGaurdian>({
 
 const studentSchema = new Schema<Student>({
   id: { type: String },
+  password: { type: String, required: true },
   name: userNameSchema,
   gender: ['male', 'female'], // enum
   dateOfBirth: { type: String },
@@ -47,8 +48,8 @@ const studentSchema = new Schema<Student>({
   bloodGroup: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'], // enum
   presentAddress: { type: String, required: true },
   permanentAddress: { type: String, required: true },
-  gaurdian: gaurdianSchema,
-  localGaurdian: localGaurdianSchema,
+  guardian: guardianSchema,
+  localGuardian: localGuardianSchema,
   profileImg: { type: String },
   isActive: ['active', 'blocked'], // enum
 });

@@ -1,4 +1,4 @@
-export type Gaurdian = {
+export type TGuardian = {
   fatherName: string;
   fatherOccupation: string;
   fatherContactNo: string;
@@ -13,7 +13,7 @@ export type UserName = {
   lastName: string;
 };
 
-export type LocalGaurdian = {
+export type TLocalGuardian = {
   name: string;
   occupation: string;
   contactNo: string;
@@ -22,6 +22,7 @@ export type LocalGaurdian = {
 
 export type Student = {
   id: string;
+  password: string;
   name: UserName;
   gender: 'male' | 'female'; // union type literal
   dateOfBirth: string;
@@ -31,8 +32,8 @@ export type Student = {
   bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
   presentAddress: string;
   permanentAddress: string;
-  gaurdian: Gaurdian;
-  localGaurdian: LocalGaurdian;
+  guardian: TGuardian;
+  localGuardian: TLocalGuardian;
   profileImg?: string;
   isActive: 'active' | 'inactive';
 };
