@@ -31,7 +31,6 @@ const createStudentIntoDB = async (password: string, studentData: TStudent) => {
 
   //* CREATE A USER
   const newUser = await UserModel.create(userData);
-  //   const result = await UserModel.create(studentData);
 
   //* CREATE A STUDENT
   //! 11-10 Create User as Student
@@ -41,6 +40,7 @@ const createStudentIntoDB = async (password: string, studentData: TStudent) => {
     studentData.user = newUser._id; //? reference id
 
     const newStudent = await StudentModel.create(studentData);
+    //   const result = await UserModel.create(studentData);
     return newStudent;
   }
   return newUser;

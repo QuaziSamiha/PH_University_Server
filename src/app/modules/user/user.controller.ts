@@ -3,7 +3,7 @@
 import { Request, Response } from 'express';
 import { UserServices } from './user.service';
 
-// ! moved to user controller
+// ! come from student controller
 const createStudent = async (req: Request, res: Response) => {
   try {
     const { password, student: studentData } = req.body;

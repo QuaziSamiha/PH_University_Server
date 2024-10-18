@@ -1,5 +1,11 @@
 import { Types } from 'mongoose';
 
+export type TUserName = {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+};
+
 export type TGuardian = {
   fatherName: string;
   fatherOccupation: string;
@@ -7,12 +13,6 @@ export type TGuardian = {
   motherName: string;
   motherOccupation: string;
   motherContactNo: string;
-};
-
-export type TUserName = {
-  firstName: string;
-  middleName: string;
-  lastName: string;
 };
 
 export type TLocalGuardian = {
@@ -25,10 +25,10 @@ export type TLocalGuardian = {
 export type TStudent = {
   id: string;
   user: Types.ObjectId; //! 11-10 Create User as Student
-  password: string;
+  // password: string;
   name: TUserName;
-  gender: 'male' | 'female'; // union type literal
-  dateOfBirth: string;
+  gender: 'male' | 'female' | 'others'; // union type literal
+  dateOfBirth?: Date;
   email: string;
   contactNo: string;
   emergencyContactNo: string;
