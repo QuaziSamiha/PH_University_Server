@@ -8,6 +8,8 @@ export type TUser = {
   role: 'admin' | 'student' | 'faculty';
   status: 'in-progress' | 'blocked';
   isDeleted: boolean;
+  //? createdAt --> this field of schema will be automatic created by mongodb
+  //? updatedAt --> this field of schema will be automatic created by mongodb
 };
 
 //! 11-9 Refactor user controller and service
