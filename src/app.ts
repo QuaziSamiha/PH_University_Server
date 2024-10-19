@@ -2,7 +2,7 @@ import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import { StudentRoutes } from './app/modules/student/student.route';
 import { UserRoutes } from './app/modules/user/user.route';
-import notFound from './app/middlewares/notFound';
+// import notFound from './app/middlewares/notFound';
 // import globalErrorHandler from './app/middlewares/globalErrorHandler';
 
 const app: Application = express();
@@ -18,9 +18,10 @@ const getAController = (req: Request, res: Response) => {
 };
 app.get('/', getAController);
 
+//! git push version6 branch
 // app.use(globalErrorHandler); //! it is showing an error
 
-app.use(notFound);
+// app.use(notFound); //! git push version7 branch
 export default app;
 
 // console.log(process.cwd());
