@@ -6,8 +6,6 @@ import { StudentControllers } from './student.controller';
 
 const router = express.Router();
 
-// router.post('/create-student', StudentControllers.createStudent); //! moved to user route
-
 router.get('/:studentId', StudentControllers.getSingleStudent);
 
 router.delete('/:studentId', StudentControllers.deleteStudent);
