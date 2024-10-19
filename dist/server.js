@@ -19,8 +19,9 @@ function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield mongoose_1.default.connect(config_1.default.database_url);
+            console.log('mongo db connected successfully samiha');
             app_1.default.listen(config_1.default.port, () => {
-                console.log(`Example app listening on port ${config_1.default.port}`);
+                console.log(`Express application listening on port ${config_1.default.port} vutu vai`);
             });
         }
         catch (error) {
@@ -28,6 +29,7 @@ function main() {
         }
     });
 }
+main();
 // app.listen(process.env.PORT, () => {
 //   console.log(`Example app listening on port ${process.env.PORT}`);
 // });

@@ -1,10 +1,15 @@
+//? 18 Oct, 24
+//? 19 Oct, 24
 // 11-8 Refactor user validation , student route ,controller and service
-// 18 Oct, 24
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { UserServices } from './user.service';
 
 // ! come from student controller
-const createStudent = async (req: Request, res: Response) => {
+const createStudent = async (
+  req: Request,
+  res: Response,
+  next: NextFunction, //! 11-11 Fix bugs and setup basic global error handler
+) => {
   try {
     const { password, student: studentData } = req.body;
     // const zodParsedData =
@@ -19,7 +24,8 @@ const createStudent = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error); //! 11-11 Fix bugs and setup basic global error handler
+    next(error);
   }
 };
 

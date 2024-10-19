@@ -7,7 +7,8 @@ import { StudentServices } from './student.service';
 const getSingleStudent = async (
   req: Request,
   res: Response,
-  next: NextFunction,
+  // ? 11-11 Fix bugs and setup basic global error handler
+  next: NextFunction, //! globalErrorHandler
 ) => {
   try {
     const { studentId } = req.params;
@@ -17,15 +18,22 @@ const getSingleStudent = async (
       message: 'Student is retrieved successfully',
       data: result,
     });
+    // } catch (err: any) {
   } catch (err) {
-    next(err);
+    // ! 11-11 Fix bugs and setup basic global error handler
+    // res.status(200).json({
+    //   success: false,
+    //   message: err.message || 'something went wrong',
+    //   error: err,
+    // });
+    next(err); //! globalErrorHandler
   }
 };
 
 const getAllStudents = async (
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction, //! globalErrorHandler
 ) => {
   try {
     const result = await StudentServices.getAllStudentsFromDB();
@@ -36,14 +44,14 @@ const getAllStudents = async (
       data: result,
     });
   } catch (err) {
-    next(err);
+    next(err); //! globalErrorHandler
   }
 };
 
 const deleteStudent = async (
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction, //! globalErrorHandler
 ) => {
   try {
     const { studentId } = req.params;
@@ -55,7 +63,7 @@ const deleteStudent = async (
       data: result,
     });
   } catch (err) {
-    next(err);
+    next(err); //! globalErrorHandler
   }
 };
 
