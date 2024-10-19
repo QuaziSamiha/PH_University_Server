@@ -16,10 +16,10 @@ app.use(cors());
 // app.use('/api/v1/users', UserRoutes);
 app.use('/api/v1', router);
 
-const getAController = (req: Request, res: Response) => {
-  res.send('Hello vutuuuu!');
+const testRoute = (req: Request, res: Response) => {
+  res.send('Hello vutuuuu samiha!');
 };
-app.get('/', getAController);
+app.get('/', testRoute);
 
 //! git push version6 branch
 // app.use(globalErrorHandler); //! it is showing an error
