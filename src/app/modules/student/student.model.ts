@@ -45,7 +45,6 @@ const studentSchema = new Schema<TStudent>({
     unique: true,
     ref: 'UserModel',
   },
-  // password: { type: String, required: true },
   name: {
     type: userNameSchema,
     required: [true, 'Name is required'],
@@ -93,20 +92,38 @@ const studentSchema = new Schema<TStudent>({
     required: [true, 'Local guardian information is required'],
   },
   profileImage: { type: String },
-  // ! 11-10 Create User as Student
-  // ? now it is available in user model
-  // isActive: {
-  //   type: String,
-  //   enum: {
-  //     values: ['active', 'blocked'],
-  //     message: '{VALUE} is not a valid status',
-  //   },
-  //   default: 'active',
-  // },
+
   isDeleted: {
     type: Boolean,
     default: false,
   },
 });
+
+//virtual
+studentSchema.virtual('fullName').get(function () {
+  return this?.name?.firstName + this?.name?.middleName + this?.name?.lastName;
+});
+
+// Query Middleware
+studentSchema.pre('find', function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+
+studentSchema.pre('findOne', function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+
+studentSchema.pre('aggregate', function (next) {
+  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } });
+  next();
+});
+
+//creating a custom static method
+// studentSchema.statics.isUserExists = async function (id: string) {
+//   const existingUser = await Student.findOne({ id });
+//   return existingUser;
+// };
 
 export const StudentModel = model<TStudent>('Student', studentSchema);

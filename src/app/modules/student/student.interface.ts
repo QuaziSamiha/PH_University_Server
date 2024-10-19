@@ -25,7 +25,6 @@ export type TLocalGuardian = {
 export type TStudent = {
   id: string;
   user: Types.ObjectId; //! 11-10 Create User as Student
-  // password: string;
   name: TUserName;
   gender: 'male' | 'female' | 'others'; // union type literal
   dateOfBirth?: Date;
@@ -38,8 +37,5 @@ export type TStudent = {
   guardian: TGuardian;
   localGuardian: TLocalGuardian;
   profileImage?: string;
-  // ! 11-10 Create User as Student
-  // ? now it is available in user model
-  // isActive: 'active' | 'inactive';
   isDeleted: boolean;
 };
