@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import express, { Application, Request, Response, NextFunction } from 'express';
+import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import { StudentRoutes } from './app/modules/student/student.route';
 import { UserRoutes } from './app/modules/user/user.route';
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
 
 const app: Application = express();
 
@@ -19,16 +17,7 @@ const getAController = (req: Request, res: Response) => {
 };
 app.get('/', getAController);
 
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  const statusCode = 500;
-  const message = err.message || 'Something went wrong!';
-
-  return res.status(statusCode).json({
-    success: false,
-    message: message,
-    error: err,
-  });
-});
+app.use(globalErrorHandler);
 export default app;
 
 // console.log(process.cwd());
