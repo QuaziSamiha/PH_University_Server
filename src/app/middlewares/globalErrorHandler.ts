@@ -1,3 +1,6 @@
+// ? 19 Oct, 24
+// 11-11 Fix bugs and setup basic global error handler
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response, NextFunction } from 'express';
 
