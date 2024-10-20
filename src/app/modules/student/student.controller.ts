@@ -3,77 +3,58 @@
 //? 20 Oct, 24
 // 12-1 Avoid Repetition of Try-Catch , use catchAsync
 
-// import { NextFunction, Request, Response } from 'express';
-import { RequestHandler } from 'express';
+import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { StudentServices } from './student.service';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getSingleStudent: RequestHandler = async (req, res, next) => {
-  // const getSingleStudent = async (
-  //   req: Request,
-  //   res: Response,
-  //   next: NextFunction,
-  // ) => {
-  try {
-    const { studentId } = req.params;
-    const result = await StudentServices.getSingleStudentFromDB(studentId);
-    res.status(200).json({
-      success: true,
-      message: 'Student is retrieved successfully',
-      data: result,
-    });
-    // } catch (err: any) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (err: any) {
-    // ! 11-11 Fix bugs and setup basic global error handler
-    res.status(200).json({
-      success: false,
-      message: err.message || 'something went wrong',
-      error: err,
-    });
-    // next(err); //! globalErrorHandler
-  }
+// * HIGHER ORDER FUNCTION -- CAN RECEIVE ANOTHER FUNCTION AS PARAMETER
+// * IF THERE IS AN ERROR TO THE ASYNCHRONOUS FUNCTION, THEN IT WILL CATCH IT
+const catchAsync = (fn: RequestHandler) => {
+  //! accepting asynchronous function as parameter
+  // ! calling the asynchronous function here, it will return a promise
+  //  Promise.resolve(fn(req, res, next)).catch(err => next(err));
+  return (req: Request, res: Response, next: NextFunction) => {
+    Promise.resolve(fn(req, res, next)).catch((err) => next(err));
+  };
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getAllStudents: RequestHandler = async (req, res, next) => {
-  try {
-    const result = await StudentServices.getAllStudentsFromDB();
-
-    res.status(200).json({
-      success: true,
-      message: 'Students are retrieved successfully',
-      data: result,
-    });
-  } catch (err) {
-    console.log(err);
-    console.log('Students are not retrieved, there is something wrong');
-    // next(err); //! globalErrorHandler
-  }
-};
+const getSingleStudent = catchAsync(async (req, res, next) => {
+  const { studentId } = req.params;
+  const result = await StudentServices.getSingleStudentFromDB(studentId);
+  res.status(200).json({
+    success: true,
+    message: 'Student is retrieved successfully',
+    data: result,
+  });
+  // sendResponse(res, {
+  //   statusCode: httpStatus.OK,
+  //   success: true,
+  //   message: 'Student is retrieved successfully',
+  //   data: result,
+  // });
+});
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const deleteStudent: RequestHandler = async (req, res, next) => {
-  // const deleteStudent = async (
-  //   req: Request,
-  //   res: Response,
-  //   next: NextFunction, //! globalErrorHandler
-  // ) => {
-  try {
-    const { studentId } = req.params;
-    const result = await StudentServices.deleteStudentFromDB(studentId);
+const getAllStudents = catchAsync(async (req, res, next) => {
+  const result = await StudentServices.getAllStudentsFromDB();
+  res.status(200).json({
+    success: true,
+    message: 'Students are retrieved successfully',
+    data: result,
+  });
+});
 
-    res.status(200).json({
-      success: true,
-      message: 'Student is deleted successfully',
-      data: result,
-    });
-  } catch (err) {
-    console.log(err);
-    console.log('there is an error to delete student');
-    // next(err); //! globalErrorHandler
-  }
-};
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const deleteStudent: RequestHandler = catchAsync(async (req, res, next) => {
+  const { studentId } = req.params;
+  const result = await StudentServices.deleteStudentFromDB(studentId);
+
+  res.status(200).json({
+    success: true,
+    message: 'Student is deleted successfully',
+    data: result,
+  });
+});
 
 export const StudentControllers = {
   getAllStudents,

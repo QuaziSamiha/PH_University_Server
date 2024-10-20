@@ -4,15 +4,9 @@
 //? 20 Oct, 24
 // 12-1 Avoid Repetition of Try-Catch , use catchAsync
 import { RequestHandler } from 'express';
-// import { NextFunction, Request, Response } from 'express';
 import { UserServices } from './user.service';
 
 const createStudent: RequestHandler = async (req, res, next) => {
-  // const createStudent = async (
-  //   req: Request,
-  //   res: Response,
-  //   next: NextFunction,
-  // ) => {
   try {
     const { password, student: studentData } = req.body;
     // const zodParsedData =
