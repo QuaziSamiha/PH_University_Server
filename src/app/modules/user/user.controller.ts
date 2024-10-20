@@ -1,16 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 //? 18 Oct, 24
 //? 19 Oct, 24
-// 11-8 Refactor user validation , student route ,controller and service
-import { NextFunction, Request, Response } from 'express';
+//? 20 Oct, 24
+// 12-1 Avoid Repetition of Try-Catch , use catchAsync
+import { RequestHandler } from 'express';
+// import { NextFunction, Request, Response } from 'express';
 import { UserServices } from './user.service';
 
-// ! come from student controller
-const createStudent = async (
-  req: Request,
-  res: Response,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  next: NextFunction, //! 11-11 Fix bugs and setup basic global error handler
-) => {
+const createStudent: RequestHandler = async (req, res, next) => {
+  // const createStudent = async (
+  //   req: Request,
+  //   res: Response,
+  //   next: NextFunction,
+  // ) => {
   try {
     const { password, student: studentData } = req.body;
     // const zodParsedData =
