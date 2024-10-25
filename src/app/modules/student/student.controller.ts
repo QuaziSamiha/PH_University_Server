@@ -4,7 +4,7 @@
 // 12-1 Avoid Repetition of Try-Catch , use catchAsync
 
 // import { NextFunction, Request, Response } from 'express';
-import { RequestHandler } from 'express';
+import { RequestHandler } from 'express'; //! 12-1 Avoid Repetition of Try-Catch , use catchAsync
 import { StudentServices } from './student.service';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
