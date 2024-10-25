@@ -1,12 +1,11 @@
 // 18 Oct, 24
-// 11-9 Refactor user controller and service
+// 25 Oct, 24
 import config from '../../config';
 import { TStudent } from '../student/student.interface';
 import { TUser } from './user.interface';
 import { UserModel } from './user.model';
 import { StudentModel } from '../student/student.model';
 
-// ! come from student service
 const createStudentIntoDB = async (password: string, studentData: TStudent) => {
   //* CREATE A USER OBJECT
   const userData: Partial<TUser> = {};

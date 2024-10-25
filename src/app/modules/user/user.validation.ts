@@ -1,6 +1,5 @@
 // 18 Oct, 24
-// 11-7 Create user interface ,model and validation
-// 11-8 Refactor user validation , student route ,controller and service
+// 25 Oct, 24
 
 import { z } from 'zod';
 

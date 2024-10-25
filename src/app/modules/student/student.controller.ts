@@ -13,7 +13,8 @@ const catchAsync = (fn: RequestHandler) => {
   // ! calling the asynchronous function here, it will return a promise
   //  Promise.resolve(fn(req, res, next)).catch(err => next(err));
   return (req: Request, res: Response, next: NextFunction) => {
-    Promise.resolve(fn(req, res, next)).catch((err) => next(err));
+    Promise.resolve(fn(req, res, next)) // if resolved
+      .catch((err) => next(err)); // if not resolved, and error occur, then go to global error handler
   };
 };
 
@@ -26,12 +27,6 @@ const getSingleStudent = catchAsync(async (req, res, next) => {
     message: 'Student is retrieved successfully',
     data: result,
   });
-  // sendResponse(res, {
-  //   statusCode: httpStatus.OK,
-  //   success: true,
-  //   message: 'Student is retrieved successfully',
-  //   data: result,
-  // });
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -45,7 +40,9 @@ const getAllStudents = catchAsync(async (req, res, next) => {
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const deleteStudent: RequestHandler = catchAsync(async (req, res, next) => {
+const deleteStudent = catchAsync(async (req, res, next) => {
+  // const deleteStudent: RequestHandler = catchAsync(async (req, res, next) => {
+  // ? no longer need try catch block
   const { studentId } = req.params;
   const result = await StudentServices.deleteStudentFromDB(studentId);
 

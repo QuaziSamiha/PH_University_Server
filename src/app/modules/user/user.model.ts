@@ -1,7 +1,8 @@
 //?  18 Oct, 24
 //?  19 Oct, 24
-
+//?  25 Oct, 24
 // 11-11 Fix bugs and setup basic global error handler
+
 import { model, Schema } from 'mongoose';
 import { TUser } from './user.interface';
 import config from '../../config';
