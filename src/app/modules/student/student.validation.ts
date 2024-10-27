@@ -1,4 +1,7 @@
 // 18 Oct, 24
+// 25 Oct, 24
+// 12-3 Implement validateRequest Middleware
+
 import { z } from 'zod';
 
 const userNameSchema = z.object({
@@ -29,23 +32,48 @@ const localGuardianSchema = z.object({
   address: z.string(),
 });
 
+// export const studentValidationSchema = z.object({
+//   id: z.string(),
+//   password: z.string().max(20),
+//   name: userNameSchema,
+//   gender: z.enum(['male', 'female', 'other']),
+//   dateOfBirth: z.string(),
+//   email: z.string().email(),
+//   contactNo: z.string(),
+//   emergencyContactNo: z.string(),
+//   bloodGroup: z.enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']),
+//   presentAddress: z.string(),
+//   permanentAddress: z.string(),
+//   guardian: guardianSchema,
+//   localGuardian: localGuardianSchema,
+//   profileImage: z.string(),
+//   isActive: z.enum(['active', 'blocked']).default('active'),
+//   isDeleted: z.boolean().optional(),
+// });
+
 export const studentValidationSchema = z.object({
-  id: z.string(),
-  password: z.string().max(20),
-  name: userNameSchema,
-  gender: z.enum(['male', 'female', 'other']),
-  dateOfBirth: z.string(),
-  email: z.string().email(),
-  contactNo: z.string(),
-  emergencyContactNo: z.string(),
-  bloodGroup: z.enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']),
-  presentAddress: z.string(),
-  permanentAddress: z.string(),
-  guardian: guardianSchema,
-  localGuardian: localGuardianSchema,
-  profileImage: z.string(),
-  isActive: z.enum(['active', 'blocked']).default('active'),
-  isDeleted: z.boolean().optional(),
+  body: z.object({
+    // id: z.string(),
+    password: z.string().max(20),
+    student: z.object({
+      name: userNameSchema,
+      gender: z.enum(['male', 'female', 'other']),
+      dateOfBirth: z.string(),
+      email: z.string().email(),
+      contactNo: z.string(),
+      emergencyContactNo: z.string(),
+      bloodGroup: z.enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']),
+      presentAddress: z.string(),
+      permanentAddress: z.string(),
+      guardian: guardianSchema,
+      localGuardian: localGuardianSchema,
+      profileImage: z.string(),
+    }),
+    // isDeleted: z.boolean().optional(), //! 12-3: by default value
+  }),
 });
 
-export default studentValidationSchema;
+// export default studentValidationSchema;
+export const studentValidations = {
+  studentValidationSchema,
+};
