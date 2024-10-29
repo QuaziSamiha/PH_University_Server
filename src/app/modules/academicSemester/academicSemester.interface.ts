@@ -1,4 +1,7 @@
-export type TMonth =
+// 28 Oct, 24
+// 12-4 Create Academic Semester Interface
+
+export type TMonths =
   | 'January'
   | 'February'
   | 'March'
@@ -16,6 +19,6 @@ export type TAcademicSemester = {
   name: 'Autumn' | 'Summer' | 'Fall';
   code: '01' | '02' | '03';
   year: Date;
-  startMonth: TMonth;
-  endMonth: TMonth;
+  startMonth: TMonths;
+  endMonth: TMonths;
 };
