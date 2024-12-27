@@ -1,4 +1,10 @@
 import { StudentModel } from './student.model';
+import { Student } from "./student.interface";
+
+const createStudentIntoDB = async (student: Student) => {
+  const result = await StudentModel.create(student); // create() mongoose function
+  return result; // this result will send to controller
+}
 
 const getAllStudentsFromDB = async () => {
   const result = await StudentModel.find();
@@ -16,6 +22,7 @@ const deleteStudentFromDB = async (id: string) => {
 };
 
 export const StudentServices = {
+  createStudentIntoDB,
   getAllStudentsFromDB,
   getSingleStudentFromDB,
   deleteStudentFromDB,
